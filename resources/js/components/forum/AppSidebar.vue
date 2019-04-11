@@ -8,7 +8,7 @@
             <v-list-tile v-for="category in categories" :key="category.id" class="mt-4">
                 <v-list-tile-content >
                     <v-list-tile-title>
-                        {{ category.name }}
+                        {{ category.catName }}
                     </v-list-tile-title>
                 </v-list-tile-content>
             </v-list-tile>

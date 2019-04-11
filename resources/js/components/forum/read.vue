@@ -5,6 +5,14 @@
         
         
             <show-question v-else :showQestiondata=question></show-question>
+
+            <v-container>
+                <replies :replies="question.replies"></replies>
+
+                <new-reply :questionSlug="question.queSlug"></new-reply>
+                
+            </v-container>
+
         
     </div>
 </template>
@@ -12,11 +20,15 @@
 <script>
 import ShowQuestion from './ShowQuestion.vue'
 import editquestion from './editquestion.vue'
+import replies from '../reply/replies.vue'
+import NewReply from '../reply/NewReply.vue'
 
 export default {
     components:{
         ShowQuestion,
-        editquestion
+        editquestion,
+        replies,
+        NewReply
     },
 
     data() {

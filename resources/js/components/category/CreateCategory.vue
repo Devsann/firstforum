@@ -6,7 +6,8 @@
                     <v-text-field v-model="form.catName" label="Category Name" required>
                     </v-text-field>
                         
-                    <v-btn type="submit" color="green">Create </v-btn>
+                    <v-btn type="submit" color="pink" v-if="editSlug">Update </v-btn>
+                    <v-btn type="submit" color="green" v-else>Create </v-btn>
 
                 </v-form>
                 
@@ -50,15 +51,31 @@ export default {
                 catName:null
             },
             categories:{},
+            editSlug:null
             
         }
     },
     created(){
+        if (!User.admin()) {
+            this.$router.push({name: 'forum'})
+        }
         axios.get('/api/category')
         .then(res => this.categories = res.data.data)
     },
     methods:{
         submit(){
+            this.editSlug ? this.update() : this.create()
+        },
+
+        update(){
+            axios.patch(`/api/category/${this.editSlug}`,this.form)
+            .then(res => {
+                this.categories.unshift(res.data)
+                this.form.catName = null;
+            })
+        },
+
+        create(){
             axios.post('/api/category',this.form)
             .then(res => {
                 console.log(res.data);
@@ -67,6 +84,7 @@ export default {
                 this.form.catName = null;
             })
         },
+
         destroy(slug, index){
             if (confirm(" Are U Sure Delete It ? ?")) {
                 axios.delete(`/api/category/${slug}`)
@@ -75,6 +93,8 @@ export default {
         },
         edit(index){
             this.form.catName = this.categories[index].catName
+            this.editSlug = this.categories[index].slug // for button change color
+            this.categories.splice(index,1)
         }
     }
 }

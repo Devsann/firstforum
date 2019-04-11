@@ -17,6 +17,8 @@ class QuestionResource extends JsonResource
         return [
           'title' => $this->title,
           'queSlug' => $this->queSlug,
+          'replies' => ReplyResource::collection($this->replies),
+          'replies_count' => $this->replies->count(),
           'path' => $this->path,
           'catName' => $this->category->catName,
           'body' => $this->body,
