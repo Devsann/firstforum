@@ -2,6 +2,7 @@
   <v-toolbar class="green accent-2">
     <v-toolbar-title class="dark">Microstack</v-toolbar-title>
     <v-spacer></v-spacer>
+    <app-notification v-if="loggedIn"></app-notification>
     <div class="hidden-sm-and-down">
       <router-link v-for="item in items" :key="item.title" :to="item.to" v-if="item.show">
         <v-btn flat>{{ item.title }}</v-btn>
@@ -11,9 +12,17 @@
 </template>
 
 <script>
+import AppNotification from './AppNotification.vue'
+
 export default {
+    components:{
+        AppNotification
+    },
+
     data() {
         return {
+            loggedIn: User.loggedIn(),
+            
             items: [{
                     title: 'forum',
                     to: '/forum',
