@@ -1,6 +1,8 @@
 <template lang="html">
   <v-toolbar class="green accent-2">
-    <v-toolbar-title class="dark">Microstack</v-toolbar-title>
+    <v-toolbar-title>
+        <router-link to="/" class="dark">Microstack</router-link>
+    </v-toolbar-title>
     <v-spacer></v-spacer>
     <app-notification v-if="loggedIn"></app-notification>
     <div class="hidden-sm-and-down">

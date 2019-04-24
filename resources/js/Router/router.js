@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
+import parallax from '../components/parallax'
 import Login from '../components/login/Login'
 import Signup from '../components/login/Signup'
 import Forum from '../components/forum/Forum'
@@ -13,6 +14,7 @@ import Logout from '../components/login/Logout'
 
 
 const routes = [
+  { path:'/', component:parallax},
   { path: '/login', component: Login },
   {path:'/logout', component: Logout},
   { path: '/signup', component: Signup },
